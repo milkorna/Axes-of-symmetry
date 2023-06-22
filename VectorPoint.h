@@ -5,7 +5,7 @@
 extern double eps;
 
 /**
- * Класс вектор используется как для представления точек в виде векторов
+ * РљР»Р°СЃСЃ РІРµРєС‚РѕСЂ РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РєР°Рє РґР»СЏ РїСЂРµРґСЃС‚Р°РІР»РµРЅРёСЏ С‚РѕС‡РµРє РІ РІРёРґРµ РІРµРєС‚РѕСЂРѕРІ
  */
 class Vector {
 private:
@@ -25,26 +25,26 @@ public:
 
     bool operator== (const Vector other);
 
-    //Скалярное произведение векторов
+    //РЎРєР°Р»СЏСЂРЅРѕРµ РїСЂРѕРёР·РІРµРґРµРЅРёРµ РІРµРєС‚РѕСЂРѕРІ
     double operator*(const Vector a) const;
 
-    //Расстояние между данной точкой и точкой a
+    //Р Р°СЃСЃС‚РѕСЏРЅРёРµ РјРµР¶РґСѓ РґР°РЅРЅРѕР№ С‚РѕС‡РєРѕР№ Рё С‚РѕС‡РєРѕР№ a
     double Distance(const Vector a) const;
 
-    //Проверка принадлежности точки сегменту с началом startSeg и концом endSeg
+    //РџСЂРѕРІРµСЂРєР° РїСЂРёРЅР°РґР»РµР¶РЅРѕСЃС‚Рё С‚РѕС‡РєРё СЃРµРіРјРµРЅС‚Сѓ СЃ РЅР°С‡Р°Р»РѕРј startSeg Рё РєРѕРЅС†РѕРј endSeg
     bool IsInSegment(const Vector startSeg, const Vector endSeg) const;
 };
 
-//Вывод координат
+//Р’С‹РІРѕРґ РєРѕРѕСЂРґРёРЅР°С‚
 std::ostream& operator<<(std::ostream& os, const Vector a);
 
-//Сложение векторов a, b
+//РЎР»РѕР¶РµРЅРёРµ РІРµРєС‚РѕСЂРѕРІ a, b
 Vector operator+(const Vector a, const Vector b);
 
-//Вычитание векторов a, b
+//Р’С‹С‡РёС‚Р°РЅРёРµ РІРµРєС‚РѕСЂРѕРІ a, b
 Vector operator-(const Vector a, const Vector b);
 
-//Умножение вектора а на скаляр l
+//РЈРјРЅРѕР¶РµРЅРёРµ РІРµРєС‚РѕСЂР° Р° РЅР° СЃРєР°Р»СЏСЂ l
 Vector operator*(const Vector a, const double l);
 
 double Cos(const Vector a, const Vector b, const Vector c);
