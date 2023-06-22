@@ -26,38 +26,37 @@ bool Vector::operator== (const Vector other)
         fabs(y_ - other.y_) < eps;
 }
 
-//Скалярное произведение векторов a, b
+//РЎРєР°Р»СЏСЂРЅРѕРµ РїСЂРѕРёР·РІРµРґРµРЅРёРµ РІРµРєС‚РѕСЂРѕРІ a
 double Vector::operator*(const Vector a) const {
     return this->x_ * a.x_ + this->y_ * a.y_;
 }
 
-//Расстояние между данной точкой и точкой b
+//Р Р°СЃСЃС‚РѕСЏРЅРёРµ РјРµР¶РґСѓ РґР°РЅРЅРѕР№ С‚РѕС‡РєРѕР№ Рё С‚РѕС‡РєРѕР№ a
 double Vector::Distance(const Vector a) const {
     return sqrt(pow(a.x_ - this->x_, 2) + pow(a.y_ - this->y_, 2));
 }
 
-//Проверка принадлежности точки сегменту с началом startSeg и концом endSeg
+//РџСЂРѕРІРµСЂРєР° РїСЂРёРЅР°РґР»РµР¶РЅРѕСЃС‚Рё С‚РѕС‡РєРё СЃРµРіРјРµРЅС‚Сѓ СЃ РЅР°С‡Р°Р»РѕРј startSeg Рё РєРѕРЅС†РѕРј endSeg
 bool Vector::IsInSegment(const Vector startSeg, const Vector endSeg) const {
-    //Epsilon умножается на 3 из-за накапливания погрешности
     return fabs(this->Distance(startSeg) + this->Distance(endSeg) - endSeg.Distance(startSeg)) < eps;
 }
 
-//Вывод координат вектора/вектора-точки
+//Р’С‹РІРѕРґ РєРѕРѕСЂРґРёРЅР°С‚ РІРµРєС‚РѕСЂР°
 std::ostream& operator<<(std::ostream& os, const Vector a) {
     return os << "(" << a.GetX() << ' ' << a.GetY() << ")";
 }
 
-//Сложение векторов a, b
+//РЎР»РѕР¶РµРЅРёРµ РІРµРєС‚РѕСЂРѕРІ a, b
 Vector operator+(const Vector a, const Vector b) {
     return { a.GetX() + b.GetX(), a.GetY() + b.GetY() };
 }
 
-//Вычитание векторов a, b
+//Р’С‹С‡РёС‚Р°РЅРёРµ РІРµРєС‚РѕСЂРѕРІ a, b
 Vector operator-(const Vector a, const Vector b) {
     return { a.GetX() - b.GetX(), a.GetY() - b.GetY() };
 }
 
-//Умножение вектора а на скаляр l
+//РЈРјРЅРѕР¶РµРЅРёРµ РІРµРєС‚РѕСЂР° Р° РЅР° СЃРєР°Р»СЏСЂ l
 Vector operator*(const Vector a, const double l) {
     return { a.GetX() * l, a.GetY() * l };
 }
