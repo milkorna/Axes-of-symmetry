@@ -3,20 +3,20 @@
 #include <fstream>
 #include "VectorPoint.h"
 
-//Целевая точка
+//Р¦РµР»РµРІР°СЏ С‚РѕС‡РєР°
 extern Vector center;
 
-//Вычисление центра масс
+//Р’С‹С‡РёСЃР»РµРЅРёРµ С†РµРЅС‚СЂР° РјР°СЃСЃ
 Vector GetCenter(const std::vector<Vector>& nodes);
 
-//Считывание узлов из входных данных
+//РЎС‡РёС‚С‹РІР°РЅРёРµ СѓР·Р»РѕРІ РёР· РІС…РѕРґРЅС‹С… РґР°РЅРЅС‹С…
 void ParseNodes(std::ifstream& input, std::vector<Vector>& nodes);
 
-//Получить индекс противоположного узла
+//РџРѕР»СѓС‡РёС‚СЊ РёРЅРґРµРєСЃ РїСЂРѕС‚РёРІРѕРїРѕР»РѕР¶РЅРѕРіРѕ СѓР·Р»Р°
 int GetOppositeNodeInd(const bool isEven, const int nodesCount, const int ind);
 
-//Проверка симметричности и получение оси
+//РџСЂРѕРІРµСЂРєР° СЃРёРјРјРµС‚СЂРёС‡РЅРѕСЃС‚Рё Рё РїРѕР»СѓС‡РµРЅРёРµ РѕСЃРё
 void CheckPairs(const Vector a, const Vector b, const std::vector<Vector>& nodes, std::vector<std::pair<Vector, Vector>>& axes, const int i, const int n);
 
-//Получить оси симметрии
+//РџРѕР»СѓС‡РёС‚СЊ РѕСЃРё СЃРёРјРјРµС‚СЂРёРё
 std::vector<std::pair<Vector, Vector>> GetAxes(const std::vector<Vector>& nodes, const int n);
