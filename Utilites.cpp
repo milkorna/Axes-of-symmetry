@@ -1,6 +1,6 @@
 #include "Utilites.h"
 
-//Вычисление центра масс
+//Р’С‹С‡РёСЃР»РµРЅРёРµ С†РµРЅС‚СЂР° РјР°СЃСЃ
 Vector GetCenter(const std::vector<Vector>& nodes) {
     double x = 0, y = 0;
     Vector c;
@@ -15,13 +15,13 @@ Vector GetCenter(const std::vector<Vector>& nodes) {
     return { x, y };
 }
 
-//Считывание узлов из входных данных
+//РЎС‡РёС‚С‹РІР°РЅРёРµ СѓР·Р»РѕРІ РёР· РІС…РѕРґРЅС‹С… РґР°РЅРЅС‹С…
 void ParseNodes(std::ifstream& input, std::vector<Vector>& nodes) {
     double x, y;
 
     while (input >> x >> y) {
         Vector node(x, y);
-        //Удаление лишних узлов (составляющих 180')
+        //РЈРґР°Р»РµРЅРёРµ Р»РёС€РЅРёС… СѓР·Р»РѕРІ (СЃРѕСЃС‚Р°РІР»СЏСЋС‰РёС… 180')
         if (nodes.size() >= 2 && nodes[nodes.size() - 1].IsInSegment(node, nodes[nodes.size() - 2]))
             nodes[nodes.size() - 1] = node;
         else nodes.push_back(node);
@@ -37,7 +37,7 @@ void ParseNodes(std::ifstream& input, std::vector<Vector>& nodes) {
     }
 }
 
-//Получить индекс противоположного узла
+//РџРѕР»СѓС‡РёС‚СЊ РёРЅРґРµРєСЃ РїСЂРѕС‚РёРІРѕРїРѕР»РѕР¶РЅРѕРіРѕ СѓР·Р»Р°
 int GetOppositeNodeInd(const bool isEven, const int nodesCount, const int ind) {
     int oppInd = 0;
     if (isEven)
@@ -48,7 +48,7 @@ int GetOppositeNodeInd(const bool isEven, const int nodesCount, const int ind) {
     return oppInd;
 }
 
-//Проверка симметричности и получение оси
+//РџСЂРѕРІРµСЂРєР° СЃРёРјРјРµС‚СЂРёС‡РЅРѕСЃС‚Рё Рё РїРѕР»СѓС‡РµРЅРёРµ РѕСЃРё
 void CheckPairs(const Vector a, const Vector b, const std::vector<Vector>& nodes, std::vector<std::pair<Vector, Vector>>& axes, const int i, const int n) {
     int pairCount = 0;
     for (int k = 1; k <= n / 2; ++k)
@@ -61,13 +61,13 @@ void CheckPairs(const Vector a, const Vector b, const std::vector<Vector>& nodes
         axes.push_back({ a, b });
 }
 
-//Получить оси симметрии
+//РџРѕР»СѓС‡РёС‚СЊ РѕСЃРё СЃРёРјРјРµС‚СЂРёРё
 std::vector<std::pair<Vector, Vector>> GetAxes(const std::vector<Vector>& nodes, const int n) {
     std::vector<std::pair<Vector, Vector>> axes;
 
     bool isEven = n % 2 == 0;
-    //если n - четное, то варианты осей: узел--против._узел, середина_стороны--середина_против._стороны
-    //если n - нечетное, то варианты осей: узел--середина_против._стороны
+    //РµСЃР»Рё n - С‡РµС‚РЅРѕРµ, С‚Рѕ РІР°СЂРёР°РЅС‚С‹ РѕСЃРµР№: СѓР·РµР»--РїСЂРѕС‚РёРІ._СѓР·РµР», СЃРµСЂРµРґРёРЅР°_СЃС‚РѕСЂРѕРЅС‹--СЃРµСЂРµРґРёРЅР°_РїСЂРѕС‚РёРІ._СЃС‚РѕСЂРѕРЅС‹
+    //РµСЃР»Рё n - РЅРµС‡РµС‚РЅРѕРµ, С‚Рѕ РІР°СЂРёР°РЅС‚С‹ РѕСЃРµР№: СѓР·РµР»--СЃРµСЂРµРґРёРЅР°_РїСЂРѕС‚РёРІ._СЃС‚РѕСЂРѕРЅС‹
 
     if (isEven) {
         for (int i = 0; i <= n / 2; ++i)
@@ -77,7 +77,7 @@ std::vector<std::pair<Vector, Vector>> GetAxes(const std::vector<Vector>& nodes,
             int p2 = (j + 1 == n ? 0 : j + 1);
             int q = (i == 0 ? n - 1 : i - 1);
 
-            //Случай узел--против._узел. Проверка равнества углов при узлах, принадлежность центра масс оси.
+            //РЎР»СѓС‡Р°Р№ СѓР·РµР»--РїСЂРѕС‚РёРІ._СѓР·РµР». РџСЂРѕРІРµСЂРєР° СЂР°РІРЅРµСЃС‚РІР° СѓРіР»РѕРІ РїСЂРё СѓР·Р»Р°С…, РїСЂРёРЅР°РґР»РµР¶РЅРѕСЃС‚СЊ С†РµРЅС‚СЂР° РјР°СЃСЃ РѕСЃРё
             if (center.IsInSegment(nodes[i], nodes[j]) && fabs(Cos(center, nodes[i], nodes[q]) - Cos(center, nodes[i], nodes[i + 1])) < eps
                 && fabs(Cos(center, nodes[j], nodes[p1]) - Cos(center, nodes[j], nodes[p2])) < eps && i != n / 2)
                 CheckPairs(nodes[i], nodes[j], nodes, axes, i, n);
@@ -87,7 +87,7 @@ std::vector<std::pair<Vector, Vector>> GetAxes(const std::vector<Vector>& nodes,
                 int h = (j - 1 < 0 ? n - 1 : j - 1);
                 Vector b = (nodes[j] + nodes[h]) * 0.5;
 
-                //Случай середина_стороны--середина_против._стороны. Проверка углов на 90' при сторонах, принадлежность центра масс оси.
+                //РЎР»СѓС‡Р°Р№ СЃРµСЂРµРґРёРЅР°_СЃС‚РѕСЂРѕРЅС‹--СЃРµСЂРµРґРёРЅР°_РїСЂРѕС‚РёРІ._СЃС‚РѕСЂРѕРЅС‹. РџСЂРѕРІРµСЂРєР° СѓРіР»РѕРІ РЅР° 90' РїСЂРё СЃС‚РѕСЂРѕРЅР°С…, РїСЂРёРЅР°РґР»РµР¶РЅРѕСЃС‚СЊ С†РµРЅС‚СЂР° РјР°СЃСЃ РѕСЃРё
                 if (center.IsInSegment(a, b) && fabs((center - a) * (nodes[i] - a)) < eps && fabs((center - b) * (nodes[j] - b)) < eps)
                     CheckPairs(a, b, nodes, axes, i, n);
             }
@@ -104,7 +104,7 @@ std::vector<std::pair<Vector, Vector>> GetAxes(const std::vector<Vector>& nodes,
             int q1 = (i == 0 ? n - 1 : i - 1);
             int q2 = (i == n - 1 ? 0 : i + 1);
 
-            //Случай узел--середина_против._стороны. Проверка углов на 90' при стороне и равенства углов при узле, принадлежность центра масс оси.
+            //РЎР»СѓС‡Р°Р№ СѓР·РµР»--СЃРµСЂРµРґРёРЅР°_РїСЂРѕС‚РёРІ._СЃС‚РѕСЂРѕРЅС‹. РџСЂРѕРІРµСЂРєР° СѓРіР»РѕРІ РЅР° 90' РїСЂРё СЃС‚РѕСЂРѕРЅРµ Рё СЂР°РІРµРЅСЃС‚РІР° СѓРіР»РѕРІ РїСЂРё СѓР·Р»Рµ, РїСЂРёРЅР°РґР»РµР¶РЅРѕСЃС‚СЊ С†РµРЅС‚СЂР° РјР°СЃСЃ РѕСЃРё
             if (center.IsInSegment(nodes[i], b) && fabs((center - b) * (b - nodes[h])) < eps && fabs(Cos(center, nodes[i], nodes[q1]) - Cos(center, nodes[i], nodes[q2])) < eps)
                 CheckPairs(nodes[i], b, nodes, axes, i, n);
         }
