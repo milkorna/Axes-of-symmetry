@@ -2,7 +2,7 @@
 
 double eps = std::numeric_limits<double>::epsilon() * 10;
 
-//Центр масс
+//Р¦РµРЅС‚СЂ РјР°СЃСЃ
 Vector center;
 
 int main(int argc, char* argv[]) {
